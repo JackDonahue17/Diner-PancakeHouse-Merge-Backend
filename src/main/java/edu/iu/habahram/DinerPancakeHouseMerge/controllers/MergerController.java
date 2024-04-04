@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 @RestController
@@ -26,12 +26,17 @@ public class MergerController {
     }
 
     @GetMapping
-    public MenuItem[] get() {
-        MenuItem[] diner = dinerRepo.getTheMenu();
-        List<MenuItem> pancake = pancakeRepo.getTheMenu();
-        List<MenuItem> ans = new ArrayList<>(diner.length + pancake.size());
-        ans.addAll(Arrays.asList(diner));
-        ans.addAll(pancake);
-        return ans.toArray(new MenuItem[0]);
+    public List<MenuItem> get() {
+        List<MenuItem> menuItems = new ArrayList<>();
+        Iterator<MenuItem> lunchItems = dinerRepo.getTheMenuIterator();
+        while(lunchItems.hasNext()) {
+            menuItems.add(lunchItems.next());
+        }
+
+        Iterator<MenuItem> breakfastItems = pancakeRepo.getTheMenuIterator();
+        while(breakfastItems.hasNext()) {
+            menuItems.add(breakfastItems.next());
+        }
+        return menuItems;
     }
 }
