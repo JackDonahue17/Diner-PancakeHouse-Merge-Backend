@@ -2,12 +2,13 @@ package edu.iu.habahram.DinerPancakeHouseMerge.model;
 
 import java.util.Iterator;
 
-public class DinerMenu implements Menu {
+public class DinerMenu extends Menu {
     static final int MAX_ITEMS = 6;
     int numberOfItems = 0;
     MenuItem[] menuItems;
 
-    public DinerMenu() {
+    public DinerMenu(String name, String description) {
+        super(name, description);
         menuItems = new MenuItem[MAX_ITEMS];
 
         addItem("Vegetarian BLT",
@@ -30,12 +31,7 @@ public class DinerMenu implements Menu {
                         boolean vegetarian, double price)
     {
         MenuItem menuItem = new MenuItem(name, description, vegetarian, price);
-        if (numberOfItems >= MAX_ITEMS) {
-            System.err.println("Sorry, menu is full!  Can't add item to menu");
-        } else {
-            menuItems[numberOfItems] = menuItem;
-            numberOfItems = numberOfItems + 1;
-        }
+        add(menuItem);
     }
 
     public MenuItem[] getMenuItems() {
