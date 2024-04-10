@@ -68,7 +68,7 @@ public class MergerController {
     public List<MenuItemRecord> getDinnerItems() {
         List<MenuItemRecord> items = mergerRepository.getTheMenuItems();
         List<MenuItemRecord> dinnerItems = new ArrayList<>();
-        for (MenuItemRecord item : items) {
+        for (MenuItemRecord item  : items) {
             if (item.description() == "Dinner") {
                 dinnerItems.add(item);
             }
